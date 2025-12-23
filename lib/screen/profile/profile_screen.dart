@@ -226,102 +226,104 @@ class ProfileScreen extends StatelessWidget {
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (_) {
-      return Column(
-
-            mainAxisSize: MainAxisSize.min,
-            // fit: StackFit.expand,
-            //  alignment: Alignment.topCenter,
-            children: [
-              IconButton(
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.white, // background color
-                  foregroundColor: Colors.black, // icon color
-                  surfaceTintColor: Colors.white,
-                  shape: CircleBorder(), // circular button
+      return SafeArea(
+        child: Column(
+        
+              mainAxisSize: MainAxisSize.min,
+              // fit: StackFit.expand,
+              //  alignment: Alignment.topCenter,
+              children: [
+                IconButton(
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.white, // background color
+                    foregroundColor: Colors.black, // icon color
+                    surfaceTintColor: Colors.white,
+                    shape: CircleBorder(), // circular button
+                  ),
+                  icon: Icon(Icons.close,size: 18,),
+                  onPressed: () => Navigator.pop(context),
                 ),
-                icon: Icon(Icons.close,size: 18,),
-                onPressed: () => Navigator.pop(context),
-              ),
-              SizedBox(height: 8,),
-              Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: Container(
-          // color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
-            boxShadow: [
-              // BoxShadow(
-              //   color: Colors.grey.shade300,
-              //   blurRadius: 10,
-              //   spreadRadius: 2,
-              // ),
-            ],
+                SizedBox(height: 8,),
+                Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Top close button
-                    
-                    // SizedBox(height: 10),
-                    // Title
-                    Text(
-                      "Contact for Support",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    SizedBox(height: 2),
-                    Divider(
-                      height: 2,thickness: 1,
-                    ),
-                    SizedBox(height: 2),
-                    // Subtext
-                    Column(
-                       mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "We are available",
-                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          "From 9 AM - 11 PM",
-                          style: TextStyle(color: Colors.grey,fontSize: 14),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    // Contact Icons
-                    Row(
-                      //  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        contactButton(Icons.phone, () {
-                          // handle phone tap
-                        }),
-                        SizedBox(width: 16),
-                        contactButton(Icons.group, () {
-                          // handle WhatsApp tap
-                        }),
-                        SizedBox(width: 16),
-                        contactButton(Icons.email_outlined, () {
-                          // handle email tap
-                        }),
-                      ],
-                    ),
-                    SizedBox(height: 2),
-                  ],
-                ),
-              ),)
-            ],
-          
+          child: Container(
+            // color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
+              boxShadow: [
+                // BoxShadow(
+                //   color: Colors.grey.shade300,
+                //   blurRadius: 10,
+                //   spreadRadius: 2,
+                // ),
+              ],
+            ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Top close button
+                      
+                      // SizedBox(height: 10),
+                      // Title
+                      Text(
+                        "Contact for Support",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      SizedBox(height: 2),
+                      Divider(
+                        height: 2,thickness: 1,
+                      ),
+                      SizedBox(height: 2),
+                      // Subtext
+                      Column(
+                         mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "We are available",
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            "From 9 AM - 11 PM",
+                            style: TextStyle(color: Colors.grey,fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      // Contact Icons
+                      Row(
+                        //  mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          contactButton(Icons.phone, () {
+                            // handle phone tap
+                          }),
+                          SizedBox(width: 16),
+                          contactButton(Icons.group, () {
+                            // handle WhatsApp tap
+                          }),
+                          SizedBox(width: 16),
+                          contactButton(Icons.email_outlined, () {
+                            // handle email tap
+                          }),
+                        ],
+                      ),
+                      SizedBox(height: 2),
+                    ],
+                  ),
+                ),)
+              ],
+            
+        ),
       );
     },
   );

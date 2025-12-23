@@ -14,7 +14,7 @@ class AllorderViewmodel extends GetxController {
     var isLoading = true.obs;
 Rx<AllOrderModel> allorder = AllOrderModel().obs;
 TextEditingController search =TextEditingController();
-RxList<Datum> searchOrder = <Datum>[].obs;
+RxList<Order> searchOrder = <Order>[].obs;
 RxString userProfileImage = "".obs;
 //cancelorder
 TextEditingController cancelReson =TextEditingController();
@@ -81,7 +81,7 @@ final ImagePicker _picker = ImagePicker();
   searchDeliveryboyorder({required String query}){
     query = query.toLowerCase();
 
-  searchOrder.value = (allorder.value.data ?? []).where((order) {
+  searchOrder.value = (allorder.value.allOrders ?? []).where((order) {
   
   final lowerQuery = query.toLowerCase();
 

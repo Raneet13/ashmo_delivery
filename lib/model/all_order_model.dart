@@ -9,54 +9,60 @@ AllOrderModel allOrderModelFromJson(String str) => AllOrderModel.fromJson(json.d
 String allOrderModelToJson(AllOrderModel data) => json.encode(data.toJson());
 
 class AllOrderModel {
-    int? status;
-    bool? error;
-    String? message;
-    List<Datum>? data;
+    final int? status;
+    final bool? error;
+    final String? message;
+    final List<Order>? todayOrders;
+    final List<Order>? allOrders;
 
     AllOrderModel({
         this.status,
         this.error,
         this.message,
-        this.data,
+        this.todayOrders,
+        this.allOrders,
     });
 
     factory AllOrderModel.fromJson(Map<String, dynamic> json) => AllOrderModel(
         status: json["status"],
         error: json["error"],
         message: json["message"],
-        data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+        todayOrders: json["today_orders"] == null ? [] : List<Order>.from(json["today_orders"]!.map((x) => Order.fromJson(x))),
+        allOrders: json["all_orders"] == null ? [] : List<Order>.from(json["all_orders"]!.map((x) => Order.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "status": status,
         "error": error,
         "message": message,
-        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+        "today_orders": todayOrders == null ? [] : List<dynamic>.from(todayOrders!.map((x) => x.toJson())),
+        "all_orders": allOrders == null ? [] : List<dynamic>.from(allOrders!.map((x) => x.toJson())),
     };
 }
 
-class Datum {
-    String? orderId;
-    String? userId;
-    String? deliveryboyId;
-    String? status;
-    String? deliveryBoyName;
-    String? cutomerName;
-    String? customerContactno;
-    String? cityName;
-    String? stateName;
-    String? pincode;
-    String? lat;
-    String? lng;
-    String? address;
-    String? distance;
-    String? deliveryDate;
-    String? deliveryTime;
-    String? createdDate;
-    List<Product>? products;
+class Order {
+    final String? type;
+    final String? orderId;
+    final String? userId;
+    final String? deliveryboyId;
+    final String? status;
+    final String? deliveryBoyName;
+    final String? cutomerName;
+    final String? customerContactno;
+    final String? cityName;
+    final String? stateName;
+    final String? pincode;
+    final String? lat;
+    final String? lng;
+    final String? address;
+    final dynamic distance;
+    final String? deliveryDate;
+    final String? deliveryTime;
+    final String? createdDate;
+    final List<Product>? products;
 
-    Datum({
+    Order({
+        this.type,
         this.orderId,
         this.userId,
         this.deliveryboyId,
@@ -77,7 +83,8 @@ class Datum {
         this.products,
     });
 
-    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    factory Order.fromJson(Map<String, dynamic> json) => Order(
+        type: json["type"],
         orderId: json["order_id"],
         userId: json["user_id"],
         deliveryboyId: json["deliveryboy_id"],
@@ -99,6 +106,7 @@ class Datum {
     );
 
     Map<String, dynamic> toJson() => {
+        "type": type,
         "order_id": orderId,
         "user_id": userId,
         "deliveryboy_id": deliveryboyId,
@@ -121,15 +129,15 @@ class Datum {
 }
 
 class Product {
-    String? productname;
-    String? variationId;
-    String? qty;
-    String? img;
-    String? price;
+    final String? productname;
+    final String? variationName;
+    final String? qty;
+    final String? img;
+    final String? price;
 
     Product({
         this.productname,
-        this.variationId,
+        this.variationName,
         this.qty,
         this.img,
         this.price,
@@ -137,7 +145,7 @@ class Product {
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         productname: json["productname"],
-        variationId: json["variation_id"],
+        variationName: json["variation_name"],
         qty: json["qty"],
         img: json["img"],
         price: json["price"],
@@ -145,7 +153,7 @@ class Product {
 
     Map<String, dynamic> toJson() => {
         "productname": productname,
-        "variation_id": variationId,
+        "variation_name": variationName,
         "qty": qty,
         "img": img,
         "price": price,

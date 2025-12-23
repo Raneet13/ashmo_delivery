@@ -9,7 +9,7 @@ void main() {
     Get.lazyPut<AuthViewmodel>(() => AuthViewmodel(), fenix: true);
   // Get.lazyPut<CheckoutViewmodel>(() => CheckoutViewmodel(), fenix: true);
    Get.lazyPut<AllorderViewmodel>(() => AllorderViewmodel(), fenix: true);
-  runApp(SafeArea(child: const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
         builder: (context, child) {
     // Wrap every page in SafeArea automatically
-    return SafeArea(
-      child: child ?? const SizedBox(),
-    );
+    return child ?? const SizedBox();
   },
       title: 'Flutter Demo',
       theme: ThemeData(

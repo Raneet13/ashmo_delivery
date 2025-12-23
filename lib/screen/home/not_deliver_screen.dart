@@ -144,18 +144,24 @@ class _NotDeliveredScreenState extends State<NotDeliveredScreen> {
                     onPressed: () {
                       // Handle save logic
                      final hasTypedReason = order.cancelReson.text.trim().isNotEmpty;
-  final hasSelectedReason =order.selectedReason.value?.trim().isNotEmpty ?? false;
-  final hasUploadedFile = order.uploadPick.value != null;
-  if (hasTypedReason || hasSelectedReason || hasUploadedFile) {
-    order.orderSts(orderId: widget.OrderId,sts: "3",reason:"${hasSelectedReason==true?hasSelectedReason:""},${hasTypedReason==true?hasTypedReason:""}").then((v){
-      if (v) {
-        Navigator.pop(context);
-      }
-      
-    });
-  }else{
-ShowToast(msg: "Give the Reason Why are you Cancel order");
-  }
+                      final hasSelectedReason =order.selectedReason.value?.trim().isNotEmpty ?? false;
+                      final hasUploadedFile = order.uploadPick.value != null;
+                      if (hasTypedReason && hasSelectedReason && hasUploadedFile) {
+                        order.orderSts(orderId: widget.OrderId,sts: "3",reason:"${hasSelectedReason==true?hasSelectedReason:""},${hasTypedReason==true?hasTypedReason:""}").then((v){
+                          if (v) {
+                            Navigator.pop(context);
+                          }
+                          
+                        });
+                      }else if(!hasTypedReason){
+                        // print(hasTypedReason);
+                    ShowToast(msg: "Give the Reason Why are you Cancel order");
+                      }else if(!hasSelectedReason){
+                        //  print(hasSelectedReason);
+                        ShowToast(msg: "Type of the exact reason Why are you Cancel order");
+                      }else if(!hasUploadedFile){
+                        ShowToast(msg: "Upload the Image Why are you Cancel order");
+                      }
 
                     },
                     style: ElevatedButton.styleFrom(
@@ -215,43 +221,44 @@ ShowToast(msg: "Give the Reason Why are you Cancel order");
                     
                   }, child: Text("Select", style: TextStyle(fontSize: 14,color: Colors.white,fontWeight: FontWeight.bold))),
                   SizedBox(width: 10),
-                   image!=null||kycImage!=""?
-                    // SizedBox(
-                    //     height: 50,
-                    //     width: 50,
-                    //     child: Padding(
-                    //           padding: EdgeInsets.only(right: 8),
-                    //           child:  ClipRRect(
-                    //                 borderRadius: BorderRadius.circular(8), // Optional: for rounded square
-                    //                 child: Image.file(
-                    //                   image!,
-                    //                   width: 50,
-                    //                   height: 50,
-                    //                   fit: BoxFit.cover,
-                    //                 ),
-                    //               ),),
-                    //   )
-                        Flexible(child:image!=null?ClipRRect(
+                   order.uploadPick.value!=null?
+                    SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Padding(
+                              padding: EdgeInsets.only(right: 8),
+                              child:  ClipRRect(
                                     borderRadius: BorderRadius.circular(8), // Optional: for rounded square
                                     child: Image.file(
-                                      image,
+                                      order.uploadPick.value!,
                                       width: 50,
                                       height: 50,
                                       fit: BoxFit.cover,
                                     ),
-                                  ):
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8), // Optional: for rounded square
-                                    child: Image.network(
-                                      "${kycImage}",
-                                      width: 50,
-                                      height: 50,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                   ,
-                                   )  : 
-                    Text("${order.uploadPick.value?? "No file selected"}", style: TextStyle(color: Colors.grey)),
+                                  ),),
+                      )
+                        // Flexible(child:order.uploadPick.value!=null?ClipRRect(
+                        //             borderRadius: BorderRadius.circular(8), // Optional: for rounded square
+                        //             child: Image.file(
+                        //               order.uploadPick.value!,
+                        //               width: 50,
+                        //               height: 50,
+                        //               fit: BoxFit.cover,
+                        //             ),
+                        //           ):
+                        //           ClipRRect(
+                        //             borderRadius: BorderRadius.circular(8), // Optional: for rounded square
+                        //             child: Image.network(
+                        //               "${kycImage}",
+                        //               width: 50,
+                        //               height: 50,
+                        //               fit: BoxFit.cover,
+                        //             ),
+                        //           )
+                        //            ,
+                        //            ) 
+                                    : 
+                    Text("${order.uploadPick.value?? "No file selected"}", maxLines: 1,softWrap: true, style: TextStyle(color: Colors.grey)),
                 ],
               ),
          
